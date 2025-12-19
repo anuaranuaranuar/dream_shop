@@ -19,7 +19,7 @@ public record ProductResDTO(
         Integer
         stockQuantity,
 
-        String
+        CategoryResDTO
         category,
 
         String

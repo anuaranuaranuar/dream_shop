@@ -1,15 +1,15 @@
 package com.parejo.msvc_producto.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "categories")
-@Getter
-@Setter
+@Getter @Setter
+@AllArgsConstructor @NoArgsConstructor
+@Builder
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +22,6 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Product> products;
+
+    private Boolean isActive;
 }

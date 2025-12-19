@@ -1,8 +1,5 @@
 package com.parejo.msvc_producto.dtos.res;
 
-import com.parejo.msvc_producto.entities.Product;
-
-import java.util.List;
 
 public record CategoryResDTO(
         Long
@@ -12,10 +9,6 @@ public record CategoryResDTO(
         name,
 
         String
-        type,
-
-        List<Product>
-        products
+        type
 ) {
-
 }

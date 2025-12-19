@@ -22,7 +22,7 @@ public record ProductReqDTO(
         @Min(value = 0, message = "El stock no puede ser negativo")
         Integer stockQuantity,
 
-        String category,
+        Long categoryId,
 
         @URL(message = "El campo url debe tener un formato valido")
         @NotBlank(message = "La URL no puede estar vacía")

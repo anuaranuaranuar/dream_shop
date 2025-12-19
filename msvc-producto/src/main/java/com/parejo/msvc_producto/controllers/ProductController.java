@@ -2,7 +2,6 @@ package com.parejo.msvc_producto.controllers;
 
 import com.parejo.msvc_producto.dtos.req.ProductReqDTO;
 import com.parejo.msvc_producto.dtos.res.ProductResDTO;
-import com.parejo.msvc_producto.entities.Product;
 import com.parejo.msvc_producto.services.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,17 +27,17 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@Valid @RequestBody ProductReqDTO dto) {
+    public ResponseEntity<ProductResDTO> create(@Valid @RequestBody ProductReqDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(dto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findById(@PathVariable Long id) {
+    public ResponseEntity<ProductResDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         productService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
