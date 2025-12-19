@@ -1,0 +1,31 @@
+package com.parejo.msvc_producto.dtos.res;
+
+
+import java.math.BigDecimal;
+
+public record ProductResDTO(
+        Long 
+        id,
+        
+        String
+        name,
+
+        String
+        description,
+
+        BigDecimal
+        price,
+
+        Integer
+        stockQuantity,
+
+        String
+        category,
+
+        String
+        imageUrl,
+
+        Double
+        discountPercentage
+) {
+}
