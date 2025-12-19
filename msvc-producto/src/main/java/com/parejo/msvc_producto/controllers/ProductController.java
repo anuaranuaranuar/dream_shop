@@ -3,7 +3,6 @@ package com.parejo.msvc_producto.controllers;
 import com.parejo.msvc_producto.dtos.req.ProductReqDTO;
 import com.parejo.msvc_producto.dtos.res.ProductResDTO;
 import com.parejo.msvc_producto.entities.Product;
-import com.parejo.msvc_producto.mappers.ProductMapper;
 import com.parejo.msvc_producto.services.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -25,7 +23,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductResDTO>> list(
-            @PageableDefault(size = 10, page = 0) Pageable pageable) {
+            @PageableDefault Pageable pageable) {
         return ResponseEntity.ok(productService.findAll(pageable));
     }
 
@@ -37,5 +35,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Product> findById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> delete(@PathVariable Long id) {
+        productService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

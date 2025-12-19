@@ -17,6 +17,7 @@ public class ProductMapper {
                 .category(dto.category())
                 .imageUrl(dto.imageUrl())
                 .discountPercentage(dto.discountPercentage())
+                .isActive(true)
                 .build();
     }
 

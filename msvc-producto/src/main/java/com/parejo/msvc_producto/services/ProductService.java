@@ -10,4 +10,5 @@ public interface ProductService {
     Page<ProductResDTO> findAll(Pageable pageable);
     Product save(ProductReqDTO dto);
     Product findById(Long id);
+    void deleteById(Long id);
 }

@@ -34,4 +34,6 @@ public class Product {
 
     // Descuento porcentual
     private Double discountPercentage;
+
+    private Boolean isActive;
 }
