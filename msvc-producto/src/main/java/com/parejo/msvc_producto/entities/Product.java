@@ -28,7 +28,9 @@ public class Product {
     @Min(value = 0, message = "El stock no puede ser negativo")
     private Integer stockQuantity;
 
-    private String category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     private String imageUrl;
 

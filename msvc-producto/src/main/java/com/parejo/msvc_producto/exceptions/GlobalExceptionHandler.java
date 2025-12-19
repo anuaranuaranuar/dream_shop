@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
-  // Captura cualquier error inesperado (Para evitar el 500 feo)
+  // Captura cualquier error inesperado (Para evitar el 500)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex) {
         Map<String, Object> body = new HashMap<>();
