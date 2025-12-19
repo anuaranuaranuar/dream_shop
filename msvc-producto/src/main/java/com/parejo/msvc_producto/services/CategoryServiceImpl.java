@@ -1,0 +1,55 @@
+package com.parejo.msvc_producto.services;
+
+import com.parejo.msvc_producto.dtos.req.CategoryReqDTO;
+import com.parejo.msvc_producto.dtos.res.CategoryResDTO;
+import com.parejo.msvc_producto.entities.Category;
+import com.parejo.msvc_producto.exceptions.ResourceNotFoundException;
+import com.parejo.msvc_producto.mappers.CategoryMapper;
+import com.parejo.msvc_producto.repositories.CategoryRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+
+@Service
+@RequiredArgsConstructor
+public class CategoryServiceImpl implements CategoryService {
+    final private CategoryRepository categoryRepository;
+    final private CategoryMapper categoryMapper;
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<CategoryResDTO> findAll(Pageable pageable) {
+
+        Page<Category> categories = categoryRepository.findAllWhereIsActiveTrue(pageable);
+
+        return categories.map(categoryMapper::toCategoryResDTO);
+    }
+
+    @Override
+    @Transactional
+    public CategoryResDTO save(CategoryReqDTO dto) {
+        Category category = categoryMapper.toCategory(dto);
+        Category categorySaved = categoryRepository.save(category);
+
+        return categoryMapper.toCategoryResDTO(categorySaved);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public CategoryResDTO findById(Long id) {
+       Category category = categoryRepository.findByIdWhereIsActiveTrue(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada"));
+       return categoryMapper.toCategoryResDTO(category);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        Category category = categoryRepository.findByIdWhereIsActiveTrue(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada"));
+        category.setIsActive(false);
+    }
+}
