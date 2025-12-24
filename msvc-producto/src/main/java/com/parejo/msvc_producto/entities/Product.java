@@ -3,6 +3,7 @@ package com.parejo.msvc_producto.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 @Table(name = "products")
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class Product extends AuditableEntity {
 
     @Id

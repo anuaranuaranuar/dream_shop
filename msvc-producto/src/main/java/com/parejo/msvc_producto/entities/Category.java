@@ -2,6 +2,7 @@ package com.parejo.msvc_producto.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @Table(name = "categories")
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class Category extends AuditableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
