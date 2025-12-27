@@ -11,4 +11,5 @@ public interface CategoryService {
     CategoryResDTO save(CategoryReqDTO dto);
     CategoryResDTO findById(Long id);
     void deleteById(Long id);
+    CategoryResDTO update(Long id, CategoryReqDTO dto);
 }

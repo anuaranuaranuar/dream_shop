@@ -8,6 +8,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategoryMapper {
 
+    public Category toCategory(Long id, CategoryReqDTO dto) {
+        return Category.builder()
+                .id(id)
+                .name(dto.name())
+                .type(dto.type())
+                .isActive(true)
+                .build();
+    }
+
     public Category toCategory(CategoryReqDTO dto) {
        return Category.builder()
                 .name(dto.name())

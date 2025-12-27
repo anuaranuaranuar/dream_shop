@@ -36,9 +36,14 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(categorySaved);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/disable/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         categoryService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{categoryId}")
+    public ResponseEntity<CategoryResDTO> update(@PathVariable Long id, @Valid @RequestBody CategoryReqDTO dto) {
+        return ResponseEntity.ok(categoryService.update(id, dto));
     }
 }

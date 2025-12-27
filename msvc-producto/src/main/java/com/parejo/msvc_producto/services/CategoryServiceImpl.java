@@ -24,7 +24,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public Page<CategoryResDTO> findAll(Pageable pageable) {
-
         Page<Category> categories = categoryRepository.findAllByIsActiveTrue(pageable);
 
         return categories.map(categoryMapper::toCategoryResDTO);
@@ -40,10 +39,20 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
+    public CategoryResDTO update(Long id, CategoryReqDTO dto) {
+        findCategoryOrThrow(id);
+        Category category = categoryMapper.toCategory(id, dto);
+        Category categorySaved = categoryRepository.save(category);
+
+        return categoryMapper.toCategoryResDTO(categorySaved);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public CategoryResDTO findById(Long id) {
-       Category category = findCategoryOrThrow(id);
-       return categoryMapper.toCategoryResDTO(category);
+        Category category = findCategoryOrThrow(id);
+        return categoryMapper.toCategoryResDTO(category);
     }
 
     @Override
